@@ -18,6 +18,11 @@ jobs:
     steps:
       - run:
           command: "echo World"
+  print_env:
+    docker:
+      - image: cimg/node:18.11.0
+    steps:
+      - run: echo ${MY_ENV_VAR}
 # Orchestrate or schedule a set of jobs
 workflows:
   # Name the workflow "welcome"
@@ -27,6 +32,7 @@ workflows:
       - welcome/run
   print_hello_world:
     jobs:
+      - print_env
       - print_hello
       - print_world:
           requires:
